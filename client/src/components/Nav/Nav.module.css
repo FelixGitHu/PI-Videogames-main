@@ -1,0 +1,42 @@
+.container{
+    display: flex;
+    top:10px;
+    /* align-items: center; */
+    background-color: royalblue;
+    width: 95%;
+    height: 45px;
+    border: 6px solid black;
+    border-radius: 5px;
+    padding: 15px;
+    justify-content: space-around;
+    align-items: center;
+}
+.boton{
+    float: left;
+    position: relative;
+    margin-bottom: 10px;
+    display: block;
+    background-color: aqua;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.btn{
+    background-color: #ab527c
+}
+
+
+.closeButton{
+    
+    position : absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.boton:hover{
+    background-color: green;
+    color: red;
+}

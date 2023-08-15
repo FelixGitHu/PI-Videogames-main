@@ -1,0 +1,21 @@
+.titulo{
+    text-align: center;
+}
+.form{
+    padding: 1.5rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.input{
+    width: 80%;
+    height: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.textArea{
+    height: 15vh;
+    width: 80%;
+}

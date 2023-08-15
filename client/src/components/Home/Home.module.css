@@ -1,0 +1,31 @@
+.container {
+    position: relative;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0);
+    background-size:auto;
+    background-position: center;
+    padding: 10px;
+    height: 80vh;
+    overflow-y: auto;
+   
+  }
+  
+    
+    .title {
+      color: #fff;
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-family: 'zrnic', sans-serif;
+    }
+  
+  
+    .envelop{
+      background-color: rgba(0, 0, 0, 0.475);
+      background-image: transparent;
+      background-size:cover;
+      background-position:center;
+      padding: 0px;
+      position: fixed;
+    }
+  
