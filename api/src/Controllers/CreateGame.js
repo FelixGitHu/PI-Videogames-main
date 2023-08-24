@@ -8,7 +8,8 @@ const { asignarImagenes } = require('../Handlers/imagenes');
 
 
 const createGame=async(req,res)=>{
-    let {nombre, descripcion, fecha_de_lanzamiento, rating, plataformas, imagen,genres} = req.body
+    try {
+        let {nombre, descripcion, fecha_de_lanzamiento, rating, plataformas, imagen,genres} = req.body
 
     if(!imagen){
         imagen=asignarImagenes();
@@ -19,7 +20,7 @@ const createGame=async(req,res)=>{
     }
     const findVideogame = await Videogame.findAll({ where: { nombre: nombre } });
     if (findVideogame.length != 0) {
-        return res.send("El nombre ya esta en uso");
+        return res.status(400).send("El nombre ya esta en uso");
     }
     
     let newGame = await Videogame.create({
@@ -34,11 +35,9 @@ const createGame=async(req,res)=>{
     let genreDatabase = await Genres.findAll({
       where: { nombre: genres },
     });
-    
+    //Se crea newGame y se le añade lo que encuentra en la base de datos de Genres
     await newGame.addGenres(genreDatabase);
-    //newGame.genres = newGame.getGenres().pluck('nombre');
-    //console.log(newGame.genres);
-    
+    //Los genres vienen con un id y un nombre y mapeo los nombre para que salgan en un arreglo por el json
     const nombreArray = genreDatabase.map(genre => genre.nombre);
     newGame={
         nombre,
@@ -49,12 +48,15 @@ const createGame=async(req,res)=>{
         plataformas: plataformas,
         genres:nombreArray,
     }
-    console.log(newGame);
     
     // //Ver como agregar en genre que viene de la BD
     
     return res.status(200).json({"El Videogame fue creado con exito":newGame});
 
+    } catch (error) {
+        res.status(400).send(error);
+    }
+    
 }
 
 module.exports={

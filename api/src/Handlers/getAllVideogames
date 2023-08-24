@@ -6,28 +6,32 @@ const {Videogame,Genres} =require('../db');
 
 
 const getApigames = async () => {
-    const allGames = [];
-    console.log("Hola");
-    for (let i = 1; i <= 5; i++) {
-        
-        let api = await axios(`${URL}/games?key=${API_KEY}&page=${i}`);
-        
-        const {results}=api.data;
-        
-        results.map(game => {
-            allGames.push( {
-                id : game.id,
-                nombre: game.name,
-                imagen: game.background_image,
-                genres: game.genres.map(e => e.name),
-                fecha_de_lanzamiento: game.released,
-                rating: game.rating,
-                plataformas: game.platforms.map((e) =>{ return e.platform.name})
+    try {
+        const allGames = [];
+    //console.log("Hola");
+        for (let i = 1; i <= 5; i++) {
+            
+            let api = await axios(`${URL}/games?key=${API_KEY}&page=${i}`);
+            
+            const {results}=api.data;
+            
+            results.map(game => {
+                allGames.push( {
+                    id : game.id,
+                    nombre: game.name,
+                    imagen: game.background_image,
+                    genres: game.genres.map(e => e.name),
+                    fecha_de_lanzamiento: game.released,
+                    rating: game.rating,
+                    plataformas: game.platforms.map((e) =>{ return e.platform.name})
+                })
             })
-        })
+        }
+        //console.log("Hola");
+        return allGames;
+    } catch (error) {
+        throw Error(error.message)
     }
-    console.log("Hola");
-    return allGames;
 }
 
 const getDatabaseGames = async () => {
@@ -55,7 +59,7 @@ const getDatabaseGames = async () => {
         };
       });
     
-    console.log("esta es mi nueva data",nuevaDb);
+    //console.log("esta es mi nueva data",nuevaDb);
     //console.log("La prueba de que hay algo",dbData);
     return nuevaDb;
   };

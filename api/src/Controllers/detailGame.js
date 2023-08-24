@@ -9,14 +9,13 @@ const { getAllVideogames } = require('../Handlers/getAllVideogames');
 const detailGame=async (req,res)=>{
     const {id} = req.params;
     try{
-        if(!id.includes('-')){
+        if(!id.includes('-')){//Es un id que no viene de la base de datos
             let allVideogames = await getAllVideogames();
             let idGame = await allVideogames.filter(game => game.id === Number(id));
             if(idGame.length){
                 const {data} = await axios(`${URL}/games/${id}?key=${API_KEY}`);
                 const description=data.description;
-                return res.status(200).json({...idGame[0],description});//lo que devuleve es un objeto
-                //ver como agregar la descripcion a idGame
+                return res.status(200).json({...idGame[0],description});//Agrega la descripcion al final
             }
             else{
                 return res.status(200).send('No se encontro ningun juego con ese ID');
@@ -45,6 +44,7 @@ const detailGame=async (req,res)=>{
                 }
             })
             //console.log("Esto es el nuevo",newgameFound);
+            //Devuelvo la posicion 0 porque es un arreglo con id unico
             return res.status(200).json(newgameFound[0]);
         }
     }catch(error){

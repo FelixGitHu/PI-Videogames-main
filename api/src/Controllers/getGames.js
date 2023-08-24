@@ -9,12 +9,13 @@ const { getAllVideogames } = require('../Handlers/getAllVideogames');
 const allGames= async(req,res)=>{
     try {
         const {name} = req.query
-        console.log("Hola");
+        //console.log("Hola");
         let videogamesTotal = await getAllVideogames();
         if(name){
-            console.log(name);
+            //console.log(name);
             let videogameName = videogamesTotal.filter((ele) => ele.nombre.toLowerCase() .includes (name.toLowerCase()));
-            console.log(videogamesTotal);
+            //*Devulve varios juegos ej Portal y Portal 2 o los de Witcher
+            //console.log(videogamesTotal);
             if(videogameName.length) {
                 return res.status(200).json(videogameName);
             }

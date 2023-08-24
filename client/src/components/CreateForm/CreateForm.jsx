@@ -12,14 +12,22 @@ export default function CreateForm () {
     const video = useSelector((state) => state.allGames);
     //console.log("Estos son los genres",genres);
     // console.log("Estos son los VG",video.length);
-    const [error, setError] = useState({});
+    const [error, setError] = useState({
+      name: "Name is a must",
+      description: "",
+      rating: "",
+      released: "",
+      img: "",
+      platforms: [],
+      genres: [],
+    });
     const getAllPlatforms=()=>{
         
         let plats=video.map((e)=>e.plataformas);
         plats=plats.flat();
         
-        let hola=new Set(plats);
-        const arr=[...hola]
+        let uniquePlats=new Set(plats);
+        const arr=[...uniquePlats]
         return arr; 
     }
     const allPlataforms=getAllPlatforms()
@@ -33,12 +41,12 @@ export default function CreateForm () {
       platforms: [],
       genres: [],
     }); 
-
+    
     function validate(input) {
       let error = {};
   
       if (!input.name) {
-        error.name = "Name is required";
+        error.name = "Name is a must";
       } else if (input.name.length > 50) {
         error.name = "Name is too long";
       }
@@ -134,8 +142,6 @@ export default function CreateForm () {
     function handleSubmit(evento) {
       evento.preventDefault();
   
-      console.log(evento.data);
-  
       let crear = {
         nombre: input.name,
         descripcion: input.description,
@@ -147,7 +153,8 @@ export default function CreateForm () {
       };
   
       dispatch(postGame(crear));
-  
+      dispatch(getAllGames());
+
       setInput({
         name: "",
         description: "",
@@ -159,7 +166,6 @@ export default function CreateForm () {
       });
   
       alert("VideoGame Created");
-      //dispatch(getAllGames());
       navigation("/home");//usar el use navigate(/home)
     }
   
@@ -199,7 +205,7 @@ export default function CreateForm () {
             </div>
   
             <div>
-              <p style={{color: "aquamarine"}}>ImageUrl:</p>
+              <p style={{color: "aquamarine"}}>ImageUrl:(Puede ir vacio)</p>
               <input
                 className={style.input}
                 type="text"
@@ -261,7 +267,7 @@ export default function CreateForm () {
                 <span style={{color: "red"}}>{error.description}</span>
               )}
             </div>
-            {Object.keys(error).length ? (
+            {((Object.keys(error).length)) ? (
             <div >
               <input type="submit" disabled name="Send" />
             </div>

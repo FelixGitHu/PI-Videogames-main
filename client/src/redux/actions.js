@@ -4,7 +4,7 @@ const URL=`http://localhost:3001`
 export function getAllGames() {
     return async function (dispatch) {
         try {
-            var {data} = await axios.get(`${URL}/videogames`);//ver si tengo que usar / o no
+            var {data} = await axios.get(`${URL}/videogames`);//*Saca la data del backEnd
             return dispatch({
             type: 'GET_ALL_GAMES',
             payload: data

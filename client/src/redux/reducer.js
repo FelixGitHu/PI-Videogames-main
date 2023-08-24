@@ -28,12 +28,12 @@ export default function rootReducer(state = inicialState, action) {
             }
         case 'SEARCH_VIDEOGAMES':
             let nombre=[];
-            console.log("mi action",action.payload);
+            //console.log("mi action",action.payload);
             if(action.payload === ''){
                 nombre=state.allGames;
             }else{
                 nombre=action.payload.map(ele=>ele)
-                console.log(nombre);
+                //console.log(nombre);
             }
             return {
                 ...state,
@@ -45,20 +45,20 @@ export default function rootReducer(state = inicialState, action) {
                 idGames: action.payload,
             }
         case 'SORT_VIDEOGAMES_BY_NAME':
-            let orderedVideogames=state.filteredGames;//ver que pasa si uso filteredGames instead
+            let orderedVideogames=state.filteredGames;
                 
             if(action.payload==="Ascendente")
             {
                 orderedVideogames.sort((a,b)=>{ 
-                    if(a.nombre > b.nombre) return 1;
-                    if(a.nombre < b.nombre) return -1;
+                    if(a.nombre.toLowerCase() > b.nombre.toLowerCase()) return 1;
+                    if(a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
                     return 0;
                 });
             }
             else if(action.payload==="Descendente"){
                 orderedVideogames.sort((a,b)=>{ 
-                    if(a.nombre < b.nombre) return 1;
-                    if(a.nombre > b.nombre) return -1;
+                    if(a.nombre.toLowerCase() < b.nombre.toLowerCase()) return 1;
+                    if(a.nombre.toLowerCase() > b.nombre.toLowerCase()) return -1;
                     return 0;
                 }); 
             }
@@ -70,7 +70,7 @@ export default function rootReducer(state = inicialState, action) {
                 filteredGames: [...orderedVideogames],
             };
         case 'SORT_RATING':
-            let orderedRating=state.filteredGames;//ver que pasa si uso filteredGames instead
+            let orderedRating=state.filteredGames;
                 
             if(action.payload==="Descendente")
             {

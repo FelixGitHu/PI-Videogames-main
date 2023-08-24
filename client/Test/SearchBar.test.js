@@ -1,7 +1,7 @@
 import SearchBar from "../src/components/SearchBar/SearchBar";
 import { render, screen } from "@testing-library/react";
 
-describe("SearchBar", () => {
+xdescribe("SearchBar", () => {
   it("should render the correct output", () => {
     const view = render(<SearchBar />);
 

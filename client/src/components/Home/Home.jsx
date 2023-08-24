@@ -76,26 +76,31 @@ function handlePlatforms(evento){
     
   ) : (
     <div className={style.envelop}>
-      <div>
-        <select title='Hola' onChange={handleOrder} placeholder='A o D'>
+      <div className={style.filters}>
+        <p style={{color:"red"}}>Filtro por nombre</p>
+        <select  onChange={handleOrder} placeholder='A o D'>
             <option value="all">All</option>
             <option value="Ascendente">A-Z</option>
             <option value="Descendente">Z-A</option>
         </select>
+        <p style={{color:"red"}}>Filtro por Rating</p>
         <select onChange={handleRating} placeholder='A o D'>
             <option value="all">All</option>
             <option value="Ascendente">Mas Rating</option>
             <option value="Descendente">Menos Rating</option>
         </select>
+        <p style={{color:"red"}}>Filtro por Creacion</p>
         <select onChange={handleFilter} placeholder='Api o DB o All'>
           <option value="all">All</option>
           <option value="api">Api</option>
           <option value="db">Base de datos</option>
         </select>
+        <p style={{color:"red"}}>Filtro por genero</p>
         <select onChange={handleGenres}>
               <option value="all">All</option>
               {genres.map((genero)=>{return <option value={genero.nombre}>{genero.nombre}</option>})} 
         </select>
+        <p style={{color:"red"}}>Filtro por plataforma</p>
         <select onChange={handlePlatforms}>
               <option value="all">All</option>
               {allPlataforms.map((plats)=>{return <option value={plats}>{plats}</option>})} 
